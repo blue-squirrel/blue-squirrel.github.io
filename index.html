@@ -64,6 +64,60 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Git常用命令" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/02/26/Git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="article-date">
+  <time datetime="2022-02-26T13:32:07.114Z" itemprop="datePublished">2022-02-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/02/26/Git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">Git常用命令</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="基本命令"><a href="#基本命令" class="headerlink" title="基本命令"></a>基本命令</h2><p>git add .   添加全部到暂存区<br>git commit -m “备注信息”    提交暂存的修改<br>git commit –am     合并提交<br>git pull    拉取代码并合入 &#x3D;&#x3D;&#x3D; git fetch &amp;&amp; git merge<br>git fetch   只拉取，不合入<br>git checkout .  放弃所有没加入暂存区的代码</p>
+<h2 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h2><p>git branch  列出本地分支<br>git branch -a   列出本地和远程分支<br>git branch -D 分支名    强制删除分支<br>git checkout -b 分支名 origin&#x2F;分支名    拉取远程到本地</p>
+<h2 id="git-stash-暂存"><a href="#git-stash-暂存" class="headerlink" title="git stash 暂存"></a>git stash 暂存</h2><p>git stash   把本地的改动暂存<br>git stash save “message”    执行存储时，添加备注<br>git stash pop   应用最近一次暂存，并删除暂存记录<br>git stash apply     应用某个存储,但不会把删除，默认使用第一个,即 stash@{0}，如果要使用其他个，git stash apply stash@{$num} 。<br>git stash list     查看stash列表<br>git stash clear     删除所有stash</p>
+<h2 id="合并前几次commit为一次"><a href="#合并前几次commit为一次" class="headerlink" title="合并前几次commit为一次"></a>合并前几次commit为一次</h2><p><img src="http://mms2.baidu.com/it/u=2534115628,2023806309&fm=253&app=138&f=PNG&fmt=auto&q=75?w=417&h=203" alt="avatar"></p>
+<p>git rebase -i <base-commit></p>
+<p>以base-commit为基准，合并基准之后的所有commit</p>
+<p>将类似</p>
+<p>pick  第一次提交<br>pick  第二次提交<br>pick  第三次提交<br>pick  第四次提交</p>
+<p>改成</p>
+<p>pick  第一次提交<br>s     第二次提交<br>s     第三次提交<br>s     第四次提交</p>
+<p>然后会弹出提交commit注释的编辑，保存后会保留注释并合并成一条</p>
+<h2 id="git-rebase"><a href="#git-rebase" class="headerlink" title="git rebase"></a>git rebase</h2><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ec7db69f93ee440a8a5b9b62dd68668c~tplv-k3u1fbpfcp-watermark.awebp" alt="avatar"></p>
+<h3 id="拉取远程的新代码"><a href="#拉取远程的新代码" class="headerlink" title="拉取远程的新代码"></a>拉取远程的新代码</h3><p>git pull –rebase</p>
+<p>rebase 会将两个分支进行合并，同时合并之前的 commit 历史。如果出现冲突，解决冲突后执行以下命令即可：</p>
+<p>git add<br>git rebase –continue   继续变基</p>
+<h3 id="公共代码库提交PR，拉取新代码"><a href="#公共代码库提交PR，拉取新代码" class="headerlink" title="公共代码库提交PR，拉取新代码"></a>公共代码库提交PR，拉取新代码</h3><p>git pull –rebase upstream master</p>
+<p>修改后 git add . &amp;&amp; git commit -m “”</p>
+<p>git push -f 即可</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/02/26/Git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" data-id="cl03wanhl0000d4ttb7750n1n" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-正则表达式" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2022/02/06/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" class="article-date">
@@ -225,6 +279,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2022/02/26/Git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">Git常用命令</a>
+          </li>
         
           <li>
             <a href="/2022/02/06/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">正则表达式</a>
