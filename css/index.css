@@ -892,6 +892,7 @@ kbd {
   z-index: 0;
   width: 100%;
   height: 100%;
+  background: url("https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fup.enterdesk.com%2Fedpic_source%2F34%2F03%2Fd0%2F3403d0bf98ee104cf69fc25f0bb35f9d.jpg&refer=http%3A%2F%2Fup.enterdesk.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1649093904&t=68242516fac3e9f5a3ed3dec6430323d") no-repeat center/cover;
 }
 .header-banner-info {
   position: absolute;
