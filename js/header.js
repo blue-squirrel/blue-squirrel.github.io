@@ -8,7 +8,7 @@ $(document).ready(function () {
   var isMenuShow = false
   var isSubmenuShow = false
 
-  function resetMenuHeight() {
+  function resetMenuHeight () {
     $menuItem.velocity(
       {
         height: $menuItem.outerHeight()
@@ -66,7 +66,7 @@ $(document).ready(function () {
     isMenuShow = false
     isSubmenuShow = false
 
-    function getNightMode() {
+    function getNightMode () {
       var nightMode = false
       try {
         if (parseInt(Stun.utils.Cookies().get(NIGHT_MODE_COOKIES_KEY))) {
