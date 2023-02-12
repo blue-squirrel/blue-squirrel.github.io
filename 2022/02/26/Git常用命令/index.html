@@ -1,0 +1,88 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="工作中常用到的git使用命令和技巧">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git常用命令">
+<meta property="og:url" content="http://example.com/2022/02/26/Git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="工作中常用到的git使用命令和技巧">
+<meta property="og:locale">
+<meta property="og:image" content="http://mms2.baidu.com/it/u=2534115628,2023806309&fm=253&app=138&f=PNG&fmt=auto&q=75?w=417&h=203">
+<meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ec7db69f93ee440a8a5b9b62dd68668c~tplv-k3u1fbpfcp-watermark.awebp">
+<meta property="article:published_time" content="2022-02-25T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-02-11T14:29:28.287Z">
+<meta property="article:author" content="Blue-squirrel">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://mms2.baidu.com/it/u=2534115628,2023806309&fm=253&app=138&f=PNG&fmt=auto&q=75?w=417&h=203"><title>Git常用命令 | Hexo</title><link ref="canonical" href="http://example.com/2022/02/26/Git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"light","wordWrap":false},
+  reward: false,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: undefined,
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"复制","copySuccess":"复制成功","copyError":"复制失败"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.2"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">首页</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">文章</span></a></div></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">Hexo</div><div class="header-banner-info__subtitle"></div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">Git常用命令</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">发表于</span><span class="post-meta-item__value">2022-02-26</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">更新于</span><span class="post-meta-item__value">2023-02-11</span></span></div></header><div class="post-body"><p>工作中常用到的git使用命令和技巧</p>
+<span id="more"></span>
+
+
+        <h2 id="基本命令"   >
+          <a href="#基本命令" class="heading-link"><i class="fas fa-link"></i></a><a href="#基本命令" class="headerlink" title="基本命令"></a>基本命令</h2>
+      <p>git add .   添加全部到暂存区<br>git commit -m “备注信息”    提交暂存的修改<br>git commit –am     合并提交<br>git pull    拉取代码并合入 &#x3D;&#x3D;&#x3D; git fetch &amp;&amp; git merge<br>git fetch   只拉取，不合入<br>git checkout .  放弃所有没加入暂存区的代码</p>
+<p>github上创建仓库<br>git remote add origin <span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://github.com/blue-squirrel/%E4%BB%93%E5%BA%93%E5%90%8D.git" >https://github.com/blue-squirrel/仓库名.git</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>   设置远程仓库<br>git push -u origin master   推送到远程分支</p>
+
+        <h2 id="分支"   >
+          <a href="#分支" class="heading-link"><i class="fas fa-link"></i></a><a href="#分支" class="headerlink" title="分支"></a>分支</h2>
+      <p>git branch  列出本地分支<br>git branch -a   列出本地和远程分支<br>git branch -D 分支名    强制删除分支<br>git checkout -b 分支名 origin&#x2F;分支名    拉取远程到本地</p>
+
+        <h2 id="git-stash-暂存"   >
+          <a href="#git-stash-暂存" class="heading-link"><i class="fas fa-link"></i></a><a href="#git-stash-暂存" class="headerlink" title="git stash 暂存"></a>git stash 暂存</h2>
+      <p>git stash   把本地的改动暂存<br>git stash save “message”    执行存储时，添加备注<br>git stash pop   应用最近一次暂存，并删除暂存记录<br>git stash apply     应用某个存储,但不会把删除，默认使用第一个,即 stash@{0}，如果要使用其他个，git stash apply stash@{$num} 。<br>git stash list     查看stash列表<br>git stash clear     删除所有stash</p>
+
+        <h2 id="合并前几次commit为一次"   >
+          <a href="#合并前几次commit为一次" class="heading-link"><i class="fas fa-link"></i></a><a href="#合并前几次commit为一次" class="headerlink" title="合并前几次commit为一次"></a>合并前几次commit为一次</h2>
+      <p><img   src="http://mms2.baidu.com/it/u=2534115628,2023806309&fm=253&app=138&f=PNG&fmt=auto&q=75?w=417&h=203" style=""  alt="avatar"></p>
+<p>git rebase -i <base-commit></p>
+<p>以base-commit为基准，合并基准之后的所有commit</p>
+<p>将类似</p>
+<p>pick  第一次提交<br>pick  第二次提交<br>pick  第三次提交<br>pick  第四次提交</p>
+<p>改成</p>
+<p>pick  第一次提交<br>s     第二次提交<br>s     第三次提交<br>s     第四次提交</p>
+<p>然后会弹出提交commit注释的编辑，保存后会保留注释并合并成一条</p>
+
+        <h2 id="git-rebase"   >
+          <a href="#git-rebase" class="heading-link"><i class="fas fa-link"></i></a><a href="#git-rebase" class="headerlink" title="git rebase"></a>git rebase</h2>
+      <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ec7db69f93ee440a8a5b9b62dd68668c~tplv-k3u1fbpfcp-watermark.awebp" alt="avatar"></p>
+
+        <h3 id="拉取远程的新代码"   >
+          <a href="#拉取远程的新代码" class="heading-link"><i class="fas fa-link"></i></a><a href="#拉取远程的新代码" class="headerlink" title="拉取远程的新代码"></a>拉取远程的新代码</h3>
+      <p>git pull –rebase</p>
+<p>rebase 会将两个分支进行合并，同时合并之前的 commit 历史。如果出现冲突，解决冲突后执行以下命令即可：</p>
+<p>git add<br>git rebase –continue   继续变基</p>
+
+        <h3 id="公共代码库提交PR，拉取新代码"   >
+          <a href="#公共代码库提交PR，拉取新代码" class="heading-link"><i class="fas fa-link"></i></a><a href="#公共代码库提交PR，拉取新代码" class="headerlink" title="公共代码库提交PR，拉取新代码"></a>公共代码库提交PR，拉取新代码</h3>
+      <p>git pull –rebase upstream master</p>
+<p>修改后 git add . &amp;&amp; git commit -m “”</p>
+<p>git push -f 即可</p>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ 本文结束，感谢您的阅读 ------</div></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2022/02/27/postman%E5%8F%82%E6%95%B0%E7%B1%BB%E5%9E%8B/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">postman参数类型</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2022/02/06/hexo%E4%BD%BF%E7%94%A8%E5%B8%AE%E5%8A%A9/"><span class="paginator-prev__text">hexo使用帮助</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">文章目录</span><span class="sidebar-nav-ov">站点概览</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4"><span class="toc-number">1.</span> <span class="toc-text">
+          基本命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E6%94%AF"><span class="toc-number">2.</span> <span class="toc-text">
+          分支</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git-stash-%E6%9A%82%E5%AD%98"><span class="toc-number">3.</span> <span class="toc-text">
+          git stash 暂存</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%88%E5%B9%B6%E5%89%8D%E5%87%A0%E6%AC%A1commit%E4%B8%BA%E4%B8%80%E6%AC%A1"><span class="toc-number">4.</span> <span class="toc-text">
+          合并前几次commit为一次</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git-rebase"><span class="toc-number">5.</span> <span class="toc-text">
+          git rebase</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8B%89%E5%8F%96%E8%BF%9C%E7%A8%8B%E7%9A%84%E6%96%B0%E4%BB%A3%E7%A0%81"><span class="toc-number">5.1.</span> <span class="toc-text">
+          拉取远程的新代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%AC%E5%85%B1%E4%BB%A3%E7%A0%81%E5%BA%93%E6%8F%90%E4%BA%A4PR%EF%BC%8C%E6%8B%89%E5%8F%96%E6%96%B0%E4%BB%A3%E7%A0%81"><span class="toc-number">5.2.</span> <span class="toc-text">
+          公共代码库提交PR，拉取新代码</span></a></li></ol></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="https://p3-passport.byteacctimg.com/img/user-avatar/0bc1a1f2b81729e65b86a40fb8870d8c~300x300.image" alt="avatar"></div><p class="sidebar-ov-author__text">blue-squirrel</p></div><div class="sidebar-ov-social"><a class="sidebar-ov-social-item" href="https://github.com/blue-squirrel" target="_blank" rel="noopener" data-popover="Github" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-github"></i></span></a></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">17</div><div class="sidebar-ov-state-item__name">文章</div></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">你已阅读了 </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2023</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Blue-squirrel</span></div><div><span>由 <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> 强力驱动</span><span> v5.4.2</span><span class="footer__devider">|</span><span>主题 - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.6.2</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script></body></html>

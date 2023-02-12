@@ -1,0 +1,152 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="使用代码规范插件实现项目代码规范化">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端工程代码规范 Eslint + Prettier + Husky + Commitlint+ Lint-staged">
+<meta property="og:url" content="http://example.com/2022/05/05/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="使用代码规范插件实现项目代码规范化">
+<meta property="og:locale">
+<meta property="og:image" content="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/859d7ee0fcb44d4889950b612fcfd044~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp">
+<meta property="og:image" content="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/bafdb7a36e814cc6ababcce086998726~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp">
+<meta property="og:image" content="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b7470030c2b04b488f0d4bc5729db82f~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp">
+<meta property="article:published_time" content="2022-05-04T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-02-11T14:29:28.290Z">
+<meta property="article:author" content="Blue-squirrel">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/859d7ee0fcb44d4889950b612fcfd044~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp"><title>前端工程代码规范 Eslint + Prettier + Husky + Commitlint+ Lint-staged | Hexo</title><link ref="canonical" href="http://example.com/2022/05/05/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"light","wordWrap":false},
+  reward: false,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: undefined,
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"复制","copySuccess":"复制成功","copyError":"复制失败"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.2"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">首页</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">文章</span></a></div></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">Hexo</div><div class="header-banner-info__subtitle"></div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">前端工程代码规范 Eslint + Prettier + Husky + Commitlint+ Lint-staged</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">发表于</span><span class="post-meta-item__value">2022-05-05</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">更新于</span><span class="post-meta-item__value">2023-02-11</span></span></div></header><div class="post-body"><p>使用代码规范插件实现项目代码规范化</p>
+<span id="more"></span>
+
+<p>首先了解几个工具</p>
+<p><strong>eslint</strong>：开发中，如果写出不符合我们规范的代码，能够及时提醒开发者，便于及时修复</p>
+<p><strong>prettier</strong>：保存&#x2F;粘贴代码时、使用格式化快捷键时，能够自动按照我们制定的规范、格式化代码</p>
+<p><strong>editorconfig</strong>：不同开发者如果使用不同的编辑器（sublime&#x2F;vscode）或系统（windows&#x2F;mac），能够执行统一的代码风格标准。比如：缩进是tab还是space，结尾end_of_line是lf还是crlf</p>
+
+        <h2 id="一、代码规范"   >
+          <a href="#一、代码规范" class="heading-link"><i class="fas fa-link"></i></a><a href="#一、代码规范" class="headerlink" title="一、代码规范"></a>一、代码规范</h2>
+      
+        <h3 id="代码检查工具-Eslint"   >
+          <a href="#代码检查工具-Eslint" class="heading-link"><i class="fas fa-link"></i></a><a href="#代码检查工具-Eslint" class="headerlink" title="代码检查工具 Eslint"></a>代码检查工具 Eslint</h3>
+      <p>安装依赖</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i eslint -D</span><br></pre></td></tr></table></div></figure>
+
+<p>生成配置文件</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx eslint --init</span><br></pre></td></tr></table></div></figure>
+
+<p>根据命令行提示进行配置，init命令会自动生成 .eslintrc.js</p>
+
+        <h3 id="代码风格工具-Prettier"   >
+          <a href="#代码风格工具-Prettier" class="heading-link"><i class="fas fa-link"></i></a><a href="#代码风格工具-Prettier" class="headerlink" title="代码风格工具 Prettier"></a>代码风格工具 Prettier</h3>
+      <figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i prettier eslint-config-prettier eslint-plugin-prettier -D</span><br></pre></td></tr></table></div></figure>
+
+<p><strong>eslint-config-prettier：</strong>让所有可能会与 prettier 规则存在冲突的 eslint rule，失效，并使用 prettier 的规则进行代码检查。相当于，用 prettier 的规则，覆盖掉 eslint 的部分规则。因此，不会再有冲突。</p>
+<p>.eslintrc.js</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 确保prettier在最后面，覆盖前面的规则</span><br><span class="line">&#123;</span><br><span class="line">    &quot;extends&quot;: [&quot;eslint:recommended&quot;, &quot;prettier&quot;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+
+<p><strong>eslint-plugin-prettier：</strong>将 prettier 的能力集成到 eslint 中。按照 prettier 的规则检查代码规范性，并进行修复。</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;extends&quot;: [&quot;eslint:recommended&quot;,&quot;plugin:prettier/recommended&quot;]	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+
+<p>创建 .prettierrc</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// 自己配置</span><br><span class="line">&#123;</span><br><span class="line">  &quot;semi&quot;: false,</span><br><span class="line">  &quot;tabWidth&quot;: 2,</span><br><span class="line">  &quot;trailingComma&quot;: &quot;none&quot;,</span><br><span class="line">  &quot;singleQuote&quot;: true,</span><br><span class="line">  &quot;arrowParens&quot;: &quot;avoid&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+
+<p>创建一个.prettierignore文件，让 Prettier CLI 和编辑器知道哪些文件不能格式化</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># Ignore artifacts:</span><br><span class="line">dist</span><br><span class="line">build</span><br><span class="line">coverage</span><br></pre></td></tr></table></div></figure>
+
+<p>配置编辑器（vscode为例）</p>
+<p>IDE中安装 <strong>Prettier-Code Formater</strong> 插件</p>
+<p><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/859d7ee0fcb44d4889950b612fcfd044~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="image.png"></p>
+<p>找到IDE中设置模块，搜索 format On Save，勾上这个就可以了。</p>
+<p><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/bafdb7a36e814cc6ababcce086998726~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="image.png"></p>
+<p>现在当我们 Ctrl&#x2F;Cmd + S 保存代码时，插件就会帮助我们自动格式化了。</p>
+
+        <h3 id="CSS规范"   >
+          <a href="#CSS规范" class="heading-link"><i class="fas fa-link"></i></a><a href="#CSS规范" class="headerlink" title="CSS规范"></a>CSS规范</h3>
+      <p>CSS检查代码规范使用 <code>stylelint</code> 插件，规范则推荐使用stylelint-config-standard</p>
+<p>安装依赖</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save-dev stylelint stylelint-config-standard</span><br></pre></td></tr></table></div></figure>
+
+<p>在项目的根目录中创建一个配置文件<code>.stylelintrc.json</code></p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;extends&quot;: &quot;stylelint-config-standard&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+
+<p>解决与<code>prettier</code>配置的冲突</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save-dev stylelint-config-prettier</span><br></pre></td></tr></table></div></figure>
+
+<p>将下面配置复制到<code>.stylelintrc.json</code>中</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;extends&quot;: [&quot;stylelint-config-standard&quot;, &quot;stylelint-config-prettier&quot;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+
+<p>在 git commitv阶段进行检测</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&quot;lint-staged&quot;: &#123;</span><br><span class="line">   &quot;**/*&quot;: &quot;prettier --write --ignore-unknown&quot;, //格式化</span><br><span class="line">   &quot;src/**.&#123;js,jsx,ts,tsx&#125;&quot;: &quot;eslint --ext .js,.jsx,.ts,.tsx&quot;, //对js文件检测</span><br><span class="line">   &quot;**/*.&#123;less,css&#125;&quot;: &quot;stylelint --fix&quot; //对css文件进行检测</span><br><span class="line"> &#125;,</span><br></pre></td></tr></table></div></figure>
+
+
+
+
+        <h2 id="二、Git规范"   >
+          <a href="#二、Git规范" class="heading-link"><i class="fas fa-link"></i></a><a href="#二、Git规范" class="headerlink" title="二、Git规范"></a>二、Git规范</h2>
+      <p>Git 有很多的 hooks, 让我们在不同的阶段,对代码进行不同的操作,控制提交到仓库的代码的规范性,和准确性, 以下只是几个常用的钩子</p>
+<ul>
+<li><p><strong>pre-commit</strong>: 通过钩子函数,判断提交的代码是否符合规范</p>
+</li>
+<li><p><strong>commit-msg</strong>: 通过钩子函数,判断 commit 信息是否符合规范</p>
+</li>
+<li><p><strong>pre-push</strong>: 通过钩子,执行测试,避免对以前的内容造成影响</p>
+</li>
+</ul>
+
+        <h4 id="几个工具"   >
+          <a href="#几个工具" class="heading-link"><i class="fas fa-link"></i></a><a href="#几个工具" class="headerlink" title="几个工具"></a>几个工具</h4>
+      <ul>
+<li><p>husky：操作Git钩子的工具</p>
+</li>
+<li><p>lint-staged：本地暂存代码检查工具</p>
+</li>
+<li><p>commitlint：commit信息校验工具</p>
+</li>
+<li><p>commitizen：辅助 commit 信息 ,就像这样,通过选择输入,规范提交信息</p>
+<p><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b7470030c2b04b488f0d4bc5729db82f~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="image.png"></p>
+</li>
+</ul>
+
+        <h4 id="安装代码校验依赖-husky和lint-staged"   >
+          <a href="#安装代码校验依赖-husky和lint-staged" class="heading-link"><i class="fas fa-link"></i></a><a href="#安装代码校验依赖-husky和lint-staged" class="headerlink" title="安装代码校验依赖 husky和lint-staged"></a>安装代码校验依赖 husky和lint-staged</h4>
+      <figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">npm install --save-dev husky lint-staged</span><br><span class="line">npx husky install</span><br><span class="line">npm set-script prepare &quot;husky install&quot;  // 在package.json中添加脚本</span><br><span class="line">npx husky add .husky/pre-commit &quot;npx lint-staged&quot;  // pre-commit 执行 npx lint-staged 指令</span><br></pre></td></tr></table></div></figure>
+
+<p>然后将以下内容添加到<code>package.json</code>中</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;lint-staged&quot;: &#123;</span><br><span class="line">    &quot;**/*&quot;: &quot;prettier --write --ignore-unknown&quot;  // 对暂存区的文件格式化</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+
+
+        <h4 id="安装提交信息依赖-commitlint"   >
+          <a href="#安装提交信息依赖-commitlint" class="heading-link"><i class="fas fa-link"></i></a><a href="#安装提交信息依赖-commitlint" class="headerlink" title="安装提交信息依赖 commitlint"></a>安装提交信息依赖 commitlint</h4>
+      <figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm i commitlint @commitlint/config-conventional -D</span><br><span class="line">npx husky add .husky/commit-msg &#x27;npx --no-install commitlint --edit &quot;$1&quot;&#x27;</span><br></pre></td></tr></table></div></figure>
+
+<p><strong>@commitlint&#x2F;config-conventional</strong> 这是一个规范配置,标识采用什么规范来执行消息校验, 这个默认是<em><strong>Angular</strong></em>的提交规范</p>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ 本文结束，感谢您的阅读 ------</div></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2022/06/12/%E4%BC%AA%E7%B1%BB%E5%92%8C%E4%BC%AA%E5%85%83%E7%B4%A0/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">伪类和伪元素，以及一些应用</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2022/04/10/Commonjs%E5%92%8CEs%20Module/"><span class="paginator-prev__text">Commonjs和Es Module</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">文章目录</span><span class="sidebar-nav-ov">站点概览</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83"><span class="toc-number">1.</span> <span class="toc-text">
+          一、代码规范</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E6%A3%80%E6%9F%A5%E5%B7%A5%E5%85%B7-Eslint"><span class="toc-number">1.1.</span> <span class="toc-text">
+          代码检查工具 Eslint</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E9%A3%8E%E6%A0%BC%E5%B7%A5%E5%85%B7-Prettier"><span class="toc-number">1.2.</span> <span class="toc-text">
+          代码风格工具 Prettier</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CSS%E8%A7%84%E8%8C%83"><span class="toc-number">1.3.</span> <span class="toc-text">
+          CSS规范</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81Git%E8%A7%84%E8%8C%83"><span class="toc-number">2.</span> <span class="toc-text">
+          二、Git规范</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%87%A0%E4%B8%AA%E5%B7%A5%E5%85%B7"><span class="toc-number">2.0.1.</span> <span class="toc-text">
+          几个工具</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E4%BB%A3%E7%A0%81%E6%A0%A1%E9%AA%8C%E4%BE%9D%E8%B5%96-husky%E5%92%8Clint-staged"><span class="toc-number">2.0.2.</span> <span class="toc-text">
+          安装代码校验依赖 husky和lint-staged</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E6%8F%90%E4%BA%A4%E4%BF%A1%E6%81%AF%E4%BE%9D%E8%B5%96-commitlint"><span class="toc-number">2.0.3.</span> <span class="toc-text">
+          安装提交信息依赖 commitlint</span></a></li></ol></li></ol></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="https://p3-passport.byteacctimg.com/img/user-avatar/0bc1a1f2b81729e65b86a40fb8870d8c~300x300.image" alt="avatar"></div><p class="sidebar-ov-author__text">blue-squirrel</p></div><div class="sidebar-ov-social"><a class="sidebar-ov-social-item" href="https://github.com/blue-squirrel" target="_blank" rel="noopener" data-popover="Github" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-github"></i></span></a></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">17</div><div class="sidebar-ov-state-item__name">文章</div></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">你已阅读了 </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2023</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Blue-squirrel</span></div><div><span>由 <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> 强力驱动</span><span> v5.4.2</span><span class="footer__devider">|</span><span>主题 - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.6.2</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script></body></html>

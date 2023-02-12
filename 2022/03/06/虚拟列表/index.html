@@ -1,0 +1,82 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="进行大量列表的渲染时，过多的DOM元素需要消耗大量的性能，这时使用虚拟列表是个不错的选择！">
+<meta property="og:type" content="article">
+<meta property="og:title" content="虚拟列表">
+<meta property="og:url" content="http://example.com/2022/03/06/%E8%99%9A%E6%8B%9F%E5%88%97%E8%A1%A8/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="进行大量列表的渲染时，过多的DOM元素需要消耗大量的性能，这时使用虚拟列表是个不错的选择！">
+<meta property="og:locale">
+<meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/10/29/16e15197c273cbd9~tplv-t2oaga2asx-watermark.awebp">
+<meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/10/29/16e1519a393dee2c~tplv-t2oaga2asx-watermark.awebp">
+<meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/10/29/16e151e017d7bba3~tplv-t2oaga2asx-watermark.awebp">
+<meta property="article:published_time" content="2022-03-05T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-02-11T14:29:28.291Z">
+<meta property="article:author" content="Blue-squirrel">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/10/29/16e15197c273cbd9~tplv-t2oaga2asx-watermark.awebp"><title>虚拟列表 | Hexo</title><link ref="canonical" href="http://example.com/2022/03/06/%E8%99%9A%E6%8B%9F%E5%88%97%E8%A1%A8/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"light","wordWrap":false},
+  reward: false,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: undefined,
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"复制","copySuccess":"复制成功","copyError":"复制失败"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.2"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">首页</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">文章</span></a></div></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">Hexo</div><div class="header-banner-info__subtitle"></div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">虚拟列表</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">发表于</span><span class="post-meta-item__value">2022-03-06</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">更新于</span><span class="post-meta-item__value">2023-02-11</span></span></div></header><div class="post-body"><p>进行大量列表的渲染时，过多的DOM元素需要消耗大量的性能，这时使用虚拟列表是个不错的选择！</p>
+<span id="more"></span>
+
+
+        <h2 id="什么是虚拟列表"   >
+          <a href="#什么是虚拟列表" class="heading-link"><i class="fas fa-link"></i></a><a href="#什么是虚拟列表" class="headerlink" title="什么是虚拟列表"></a>什么是虚拟列表</h2>
+      <p><strong>虚拟列表</strong>其实是按需显示的一种实现，即只对<strong>可见区域</strong>进行渲染，对<strong>非可见区域</strong>中的数据不渲染或部分渲染的技术，从而达到极高的渲染性能。</p>
+<p>假设有1万条记录需要同时渲染，我们屏幕的<strong>可见区域</strong>的高度为<strong>500px</strong>,而列表项的高度为<strong>50px</strong>，则此时我们在屏幕中最多只能看到10个列表项。</p>
+<p>假设滚动发生，滚动条距顶部的位置为<strong>150px</strong>,则我们可得知在<strong>可见区域</strong>内的列表项为<strong>第4项</strong>至<strong>第13项</strong>。</p>
+<p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/10/29/16e15197c273cbd9~tplv-t2oaga2asx-watermark.awebp" alt="img"></p>
+
+        <h2 id="实现"   >
+          <a href="#实现" class="heading-link"><i class="fas fa-link"></i></a><a href="#实现" class="headerlink" title="实现"></a>实现</h2>
+      <figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;infinite-list-container&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;infinite-list-phantom&quot;&gt;&lt;/div&gt;</span><br><span class="line">    &lt;div class=&quot;infinite-list&quot;&gt;</span><br><span class="line">      &lt;!-- item-1 --&gt;</span><br><span class="line">      &lt;!-- item-2 --&gt;</span><br><span class="line">      &lt;!-- ...... --&gt;</span><br><span class="line">      &lt;!-- item-n --&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>设置占位容器，用于撑起滚动条。infinite-list-phantom 为容器内的占位。</li>
+<li>渲染屏幕内能够容纳的元素，根据索引对总数据进行截取。infinite-list 为列表项的渲染区域</li>
+</ol>
+<p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/10/29/16e1519a393dee2c~tplv-t2oaga2asx-watermark.awebp" alt="img"></p>
+<ol>
+<li>计算当前可视区域<strong>起始数据索引****startIndex</strong></li>
+<li>计算当前可视区域<strong>结束数据索引****endIndex</strong></li>
+<li>计算<strong>当前可视区域的数据</strong>，并渲染到页面中</li>
+<li>计算<strong>startIndex</strong>对应的数据在整个列表中的<strong>偏移位置startOffset</strong>并设置到列表上</li>
+</ol>
+<ul>
+<li>列表总高度listHeight &#x3D; listData.length * itemSize</li>
+<li>可显示的列表项数visibleCount &#x3D; Math.ceil(screenHeight &#x2F; itemSize)，数量为(500 &#x2F; 50) + 1，<strong>多一个偏移项</strong>。</li>
+<li>数据的起始索引startIndex &#x3D; Math.floor(scrollTop &#x2F; itemSize)</li>
+<li>数据的结束索引endIndex &#x3D; startIndex + visibleCount，最大为数据总长度。</li>
+<li>列表显示数据为visibleData &#x3D; listData.slice(startIndex,endIndex)</li>
+</ul>
+<p>当滚动后，由于渲染区域相对于可视区域已经发生了偏移，此时我需要获取一个偏移量startOffset，通过<strong>样式控制</strong>将渲染区域偏移至可视区域中。</p>
+<ul>
+<li>偏移量startOffset &#x3D; scrollTop - (scrollTop % itemSize);不超过一个，不用偏移，超过一个，偏移超过的floor值。</li>
+</ul>
+<p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/10/29/16e151e017d7bba3~tplv-t2oaga2asx-watermark.awebp" alt="img"></p>
+<p>监听容器内的滚动事件，不断的对上面的数据进行重新赋值即可。</p>
+<p>以上思路仅适用于固定高度列表。</p>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ 本文结束，感谢您的阅读 ------</div></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2022/03/06/JS%E7%AE%80%E5%8C%96%E6%8A%80%E5%B7%A7/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">JS简化技巧</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2022/02/27/postman%E5%8F%82%E6%95%B0%E7%B1%BB%E5%9E%8B/"><span class="paginator-prev__text">postman参数类型</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">文章目录</span><span class="sidebar-nav-ov">站点概览</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E8%99%9A%E6%8B%9F%E5%88%97%E8%A1%A8"><span class="toc-number">1.</span> <span class="toc-text">
+          什么是虚拟列表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0"><span class="toc-number">2.</span> <span class="toc-text">
+          实现</span></a></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="https://p3-passport.byteacctimg.com/img/user-avatar/0bc1a1f2b81729e65b86a40fb8870d8c~300x300.image" alt="avatar"></div><p class="sidebar-ov-author__text">blue-squirrel</p></div><div class="sidebar-ov-social"><a class="sidebar-ov-social-item" href="https://github.com/blue-squirrel" target="_blank" rel="noopener" data-popover="Github" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-github"></i></span></a></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">17</div><div class="sidebar-ov-state-item__name">文章</div></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">你已阅读了 </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2023</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Blue-squirrel</span></div><div><span>由 <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> 强力驱动</span><span> v5.4.2</span><span class="footer__devider">|</span><span>主题 - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.6.2</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script></body></html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="几种方案实现主题切换，适用于预设主题和自定义主题，可以根据实际需要和实现复杂度灵活选择。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端主题切换的几种实现">
+<meta property="og:url" content="http://example.com/2023/02/11/%E5%89%8D%E7%AB%AF%E4%B8%BB%E9%A2%98%E5%88%87%E6%8D%A2%E7%9A%84%E5%87%A0%E7%A7%8D%E5%AE%9E%E7%8E%B0/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="几种方案实现主题切换，适用于预设主题和自定义主题，可以根据实际需要和实现复杂度灵活选择。">
+<meta property="og:locale">
+<meta property="article:published_time" content="2023-02-11T14:29:28.289Z">
+<meta property="article:modified_time" content="2023-02-11T14:29:28.289Z">
+<meta property="article:author" content="Blue-squirrel">
+<meta name="twitter:card" content="summary"><title>前端主题切换的几种实现 | Hexo</title><link ref="canonical" href="http://example.com/2023/02/11/%E5%89%8D%E7%AB%AF%E4%B8%BB%E9%A2%98%E5%88%87%E6%8D%A2%E7%9A%84%E5%87%A0%E7%A7%8D%E5%AE%9E%E7%8E%B0/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"light","wordWrap":false},
+  reward: false,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: undefined,
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"复制","copySuccess":"复制成功","copyError":"复制失败"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.2"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">首页</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">文章</span></a></div></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">Hexo</div><div class="header-banner-info__subtitle"></div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">前端主题切换的几种实现</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">发表于</span><span class="post-meta-item__value">2023-02-11</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">更新于</span><span class="post-meta-item__value">2023-02-11</span></span></div></header><div class="post-body"><p>几种方案实现主题切换，适用于预设主题和自定义主题，可以根据实际需要和实现复杂度灵活选择。</p>
+<span id="more"></span>
+
+
+        <h2 id="滤镜"   >
+          <a href="#滤镜" class="heading-link"><i class="fas fa-link"></i></a><a href="#滤镜" class="headerlink" title="滤镜"></a>滤镜</h2>
+      <p>使用<code>css filter</code>，直接进行页面整体颜色转换，进行主题切换</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">const switchTheme = theme =&gt; &#123;</span><br><span class="line">    if (theme === &#x27;dark&#x27;) &#123;</span><br><span class="line">        document.body.style.filter = &#x27;invert(100%)&#x27;;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        document.body.style.filter = &#x27;invert(0%)&#x27;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></div></figure>
+
+<p>直接整体使用的话，不仅会将元素进行过滤，同时对图片、视频也会生效，需要特殊处理，让图片、视频保持正常显示。</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">img:not([src*=&#x27;.svg&#x27;]), video &#123;</span><br><span class="line">    filter: invert(100%);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+
+<p>一些特殊节日需要使网站整体变灰</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">:root &#123;</span><br><span class="line">    filter: grayscale(100%);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+
+
+        <h2 id="link标签动态引入（主题变量）"   >
+          <a href="#link标签动态引入（主题变量）" class="heading-link"><i class="fas fa-link"></i></a><a href="#link标签动态引入（主题变量）" class="headerlink" title="link标签动态引入（主题变量）"></a>link标签动态引入（主题变量）</h2>
+      <p>提前定义几套CSS主题样式文件，切换主题时，创建<code>link</code>标签动态插入到<code>head</code>标签中，或者动态修改<code>link</code>标签的<code>href</code>属性</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">export function preLoadStyles(styles: Array&lt;string&gt;, callback?: () =&gt; void) &#123;</span><br><span class="line">  let rest = styles.length;</span><br><span class="line">  for (const path of styles) &#123;</span><br><span class="line">    const style = document.createElement(&#x27;link&#x27;);</span><br><span class="line">    style.setAttribute(&#x27;rel&#x27;, &#x27;stylesheet&#x27;);</span><br><span class="line">    style.setAttribute(&#x27;type&#x27;, &#x27;text/css&#x27;);</span><br><span class="line">    style.setAttribute(&#x27;href&#x27;, path);</span><br><span class="line">    /*style.onload = () =&gt; &#123;</span><br><span class="line">      if (--rest === 0) &#123;</span><br><span class="line">        callback?.();</span><br><span class="line">      &#125;</span><br><span class="line">      document.head.removeChild(style);</span><br><span class="line">      style.onload = null;</span><br><span class="line">    &#125;;*/</span><br><span class="line">    document.head.appendChild(style);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+
+
+        <h3 id="优点："   >
+          <a href="#优点：" class="heading-link"><i class="fas fa-link"></i></a><a href="#优点：" class="headerlink" title="优点："></a>优点：</h3>
+      <ol>
+<li>实现按需加载，提升首屏加载性能</li>
+<li>修改CSS变量即可修改主题，新增&#x2F;修改方便</li>
+</ol>
+
+        <h3 id="缺点"   >
+          <a href="#缺点" class="heading-link"><i class="fas fa-link"></i></a><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3>
+      <ol>
+<li>动态加载样式文件，如果文件过大可能有加载延迟，切换不流畅</li>
+</ol>
+
+        <h2 id="加载全部主题文件（主题变量），用类名进行切换"   >
+          <a href="#加载全部主题文件（主题变量），用类名进行切换" class="heading-link"><i class="fas fa-link"></i></a><a href="#加载全部主题文件（主题变量），用类名进行切换" class="headerlink" title="加载全部主题文件（主题变量），用类名进行切换"></a>加载全部主题文件（主题变量），用类名进行切换</h2>
+      <p>将所有主题文件引入，切换整体的类名，使不同主题生效</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function change(theme) &#123;</span><br><span class="line">  document.body.className = theme;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+
+
+        <h3 id="优点：-1"   >
+          <a href="#优点：-1" class="heading-link"><i class="fas fa-link"></i></a><a href="#优点：-1" class="headerlink" title="优点："></a>优点：</h3>
+      <ol>
+<li>切换样式不会卡顿</li>
+</ol>
+
+        <h3 id="缺点-1"   >
+          <a href="#缺点-1" class="heading-link"><i class="fas fa-link"></i></a><a href="#缺点-1" class="headerlink" title="缺点"></a>缺点</h3>
+      <ol>
+<li>首屏加载时间增加</li>
+</ol>
+
+        <h2 id="CSS变量-动态setProperty"   >
+          <a href="#CSS变量-动态setProperty" class="heading-link"><i class="fas fa-link"></i></a><a href="#CSS变量-动态setProperty" class="headerlink" title="CSS变量+动态setProperty"></a>CSS变量+动态setProperty</h2>
+      <p>前面方法主要适用于预设好的几种主题，此方案适用于用于根据颜色面板自定义主体色</p>
+<p>定义一个工具类方法，用于修改指定的CSS变量值，调用的是CSSStyleDeclaration.setProperty</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 预设主体色</span><br><span class="line">:root &#123;</span><br><span class="line">  --theme-color: #333;</span><br><span class="line">  --theme-background: #eee;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export const setCssVar = (prop: string, val: any, dom = document.documentElement) =&gt; &#123;</span><br><span class="line">  dom.style.setProperty(prop, val)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setCssVar(&#x27;--theme-color&#x27;, color)</span><br></pre></td></tr></table></div></figure>
+
+
+        <h3 id="优点：-2"   >
+          <a href="#优点：-2" class="heading-link"><i class="fas fa-link"></i></a><a href="#优点：-2" class="headerlink" title="优点："></a>优点：</h3>
+      <ol>
+<li>不用重新加载样式文件，切换流畅</li>
+<li>可以实时自定义主体色</li>
+</ol>
+
+        <h3 id="缺点-2"   >
+          <a href="#缺点-2" class="heading-link"><i class="fas fa-link"></i></a><a href="#缺点-2" class="headerlink" title="缺点"></a>缺点</h3>
+      <ol>
+<li>暂无</li>
+</ol>
+
+        <h2 id="总结"   >
+          <a href="#总结" class="heading-link"><i class="fas fa-link"></i></a><a href="#总结" class="headerlink" title="总结"></a>总结</h2>
+      <p>固定预设主题样式：适合link标签动态引入（主题变量）<br>主题样式不固定：适合CSS变量+动态setProperty</p>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ 本文结束，感谢您的阅读 ------</div></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2023/02/12/test/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">test</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2022/08/30/Docker%E5%AE%9E%E7%8E%B0%E5%89%8D%E5%90%8E%E7%AB%AF%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2/"><span class="paginator-prev__text">Docker实现前后端自动化部署</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">文章目录</span><span class="sidebar-nav-ov">站点概览</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BB%A4%E9%95%9C"><span class="toc-number">1.</span> <span class="toc-text">
+          滤镜</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#link%E6%A0%87%E7%AD%BE%E5%8A%A8%E6%80%81%E5%BC%95%E5%85%A5%EF%BC%88%E4%B8%BB%E9%A2%98%E5%8F%98%E9%87%8F%EF%BC%89"><span class="toc-number">2.</span> <span class="toc-text">
+          link标签动态引入（主题变量）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%98%E7%82%B9%EF%BC%9A"><span class="toc-number">2.1.</span> <span class="toc-text">
+          优点：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%BA%E7%82%B9"><span class="toc-number">2.2.</span> <span class="toc-text">
+          缺点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%A0%E8%BD%BD%E5%85%A8%E9%83%A8%E4%B8%BB%E9%A2%98%E6%96%87%E4%BB%B6%EF%BC%88%E4%B8%BB%E9%A2%98%E5%8F%98%E9%87%8F%EF%BC%89%EF%BC%8C%E7%94%A8%E7%B1%BB%E5%90%8D%E8%BF%9B%E8%A1%8C%E5%88%87%E6%8D%A2"><span class="toc-number">3.</span> <span class="toc-text">
+          加载全部主题文件（主题变量），用类名进行切换</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%98%E7%82%B9%EF%BC%9A-1"><span class="toc-number">3.1.</span> <span class="toc-text">
+          优点：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%BA%E7%82%B9-1"><span class="toc-number">3.2.</span> <span class="toc-text">
+          缺点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CSS%E5%8F%98%E9%87%8F-%E5%8A%A8%E6%80%81setProperty"><span class="toc-number">4.</span> <span class="toc-text">
+          CSS变量+动态setProperty</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%98%E7%82%B9%EF%BC%9A-2"><span class="toc-number">4.1.</span> <span class="toc-text">
+          优点：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%BA%E7%82%B9-2"><span class="toc-number">4.2.</span> <span class="toc-text">
+          缺点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">5.</span> <span class="toc-text">
+          总结</span></a></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="https://p3-passport.byteacctimg.com/img/user-avatar/0bc1a1f2b81729e65b86a40fb8870d8c~300x300.image" alt="avatar"></div><p class="sidebar-ov-author__text">blue-squirrel</p></div><div class="sidebar-ov-social"><a class="sidebar-ov-social-item" href="https://github.com/blue-squirrel" target="_blank" rel="noopener" data-popover="Github" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-github"></i></span></a></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">17</div><div class="sidebar-ov-state-item__name">文章</div></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">你已阅读了 </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2023</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Blue-squirrel</span></div><div><span>由 <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> 强力驱动</span><span> v5.4.2</span><span class="footer__devider">|</span><span>主题 - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.6.2</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script></body></html>
